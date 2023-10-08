@@ -1,6 +1,6 @@
-import { Result } from "../../types";
+import { Result } from "./types";
 
-export async function GET() {
+export async function getUpcomingMovies() {
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/upcoming?language=fr-FR&page=1&region=FR`,
     {
