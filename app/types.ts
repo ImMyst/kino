@@ -1,4 +1,4 @@
-export type Movie = {
+export type UpcomingMovie = {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids: number[];
@@ -15,13 +15,13 @@ export type Movie = {
   vote_count: number;
 };
 
-export type Result = {
+export type UpcomingMoviesResult = {
   dates: {
     maximum: string;
     minimum: string;
   };
   page: number;
-  results: Movie[];
+  results: UpcomingMovie[];
   total_pages: number;
   total_results: number;
 };
