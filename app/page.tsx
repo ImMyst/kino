@@ -40,7 +40,7 @@ export default async function Home() {
             {movie.title}
           </span>
           <span className="text-sm text-gray-500">
-            {new Date(movie.release_date).toLocaleDateString()}
+            {new Date(movie.release_date).toLocaleDateString('fr-FR')}
           </span>
         </div>
       ))}
