@@ -1,12 +1,10 @@
-import { FALLBACK_URL_IMAGE } from "./constants";
-import { UpcomingMoviesResult } from "./types";
+import { FALLBACK_URL_IMAGE } from "@app/constants";
+import { type UpcomingMoviesResult } from "@app/types";
 
 export default async function Home() {
-  const response = await fetch(`${process.env.BASE_URL}/api/upcoming`, {
-    method: 'GET'
-  });
+  const response = await fetch(`${process.env.BASE_URL}/api/upcoming`);
 
-  const data = await response.json() as UpcomingMoviesResult;
+  const data = (await response.json()) as UpcomingMoviesResult;
   const sortedMovies = data.results.sort((a, b) => {
     const releaseDateA = Date.parse(a.release_date);
     const releaseDateB = Date.parse(b.release_date);
@@ -17,8 +15,8 @@ export default async function Home() {
     <main className="flex flex-wrap justify-center gap-10 p-12">
       {sortedMovies.map((movie) => (
         <div
-          className="flex flex-col p-2 bg-slate-100 cursor-pointer hover:bg-slate-200 transition-colors shadow-sm rounded-md"
           key={movie.id}
+          className="flex flex-col p-2 bg-slate-100 cursor-pointer hover:bg-slate-200 transition-colors shadow-sm rounded-md"
         >
           <img
             src={
@@ -41,7 +39,7 @@ export default async function Home() {
             {movie.title}
           </span>
           <span className="text-sm text-gray-500">
-            {new Date(movie.release_date).toLocaleDateString('fr-FR')}
+            {new Date(movie.release_date).toLocaleDateString("fr-FR")}
           </span>
         </div>
       ))}

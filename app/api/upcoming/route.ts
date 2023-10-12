@@ -1,5 +1,5 @@
-import { TMDB_API_URL } from "../../constants";
-import { UpcomingMoviesResult } from "../../types";
+import { TMDB_API_URL } from "@app/constants";
+import { type UpcomingMoviesResult } from "@app/types";
 
 export async function GET() {
   const res = await fetch(
