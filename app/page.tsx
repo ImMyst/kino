@@ -1,11 +1,12 @@
 import { FALLBACK_URL_IMAGE } from "./constants";
-import { getUpcomingMovies } from "./api/get-upcoming-movies";
 import { UpcomingMoviesResult } from "./types";
 
 export default async function Home() {
-  const response = await getUpcomingMovies();
+  const response = await fetch(`${process.env.BASE_URL}/api/upcoming`, {
+    method: 'GET'
+  });
 
-  const data = (await response.json()) as UpcomingMoviesResult;
+  const data = await response.json() as UpcomingMoviesResult;
   const sortedMovies = data.results.sort((a, b) => {
     const releaseDateA = Date.parse(a.release_date);
     const releaseDateB = Date.parse(b.release_date);
