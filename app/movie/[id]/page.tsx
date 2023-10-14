@@ -14,7 +14,7 @@ export default async function MovieDetail({
   return (
     <main className="flex flex-wrap justify-center gap-10 p-12 max-w-screen-lg mx-auto">
       <MovieCard {...movie} />
-      <p>{movie.overview}</p>
+      <p>{movie?.overview}</p>
     </main>
   );
 }
