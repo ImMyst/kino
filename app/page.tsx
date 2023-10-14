@@ -1,4 +1,4 @@
-import MovieCard from "@app/_components/MovieCard";
+import MovieCard from "@app/components/MovieCard";
 import { type UpcomingMoviesResult } from "@app/types";
 
 export default async function Home() {
