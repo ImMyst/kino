@@ -1,13 +1,18 @@
 import MovieCard from "@app/components/MovieCard";
 import { type MovieDetail } from "@app/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function MovieDetail({
   params,
 }: {
   params: { id: number };
 }) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/api/movie/${params.id}`
+    `${process.env.NEXT_PUBLIC_URL}/api/movie/${params.id}`,
+    {
+      cache: "no-store",
+    }
   );
 
   const movie = (await response.json()) as MovieDetail;

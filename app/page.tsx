@@ -1,8 +1,12 @@
 import MovieCard from "@app/components/MovieCard";
 import { type UpcomingMoviesResult } from "@app/types";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/upcoming`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/upcoming`, {
+    cache: "no-store",
+  });
 
   const data = (await response.json()) as UpcomingMoviesResult;
   const sortedMovies = data.results.sort((a, b) => {
