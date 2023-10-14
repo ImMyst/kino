@@ -7,7 +7,7 @@ export default async function MovieDetail({
   params: { id: number };
 }) {
   const response = await fetch(
-    `${process.env.BASE_URL}/api/movie/${params.id}`
+    `${process.env.NEXT_PUBLIC_URL}/api/movie/${params.id}`
   );
 
   const movie = (await response.json()) as MovieDetail;
