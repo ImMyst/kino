@@ -1,6 +1,5 @@
+import MovieCard from "@app/_components/MovieCard";
 import { type MovieDetail } from "@app/types";
-import MovieCard from "@components/MovieCard";
-import Link from "next/link";
 
 export default async function MovieDetail({
   params,
@@ -8,10 +7,7 @@ export default async function MovieDetail({
   params: { id: number };
 }) {
   const response = await fetch(
-    `${process.env.BASE_URL}/api/movie/${params.id}`,
-    {
-      cache: "no-cache",
-    }
+    `${process.env.BASE_URL}/api/movie/${params.id}`
   );
 
   const movie = (await response.json()) as MovieDetail;
