@@ -12,7 +12,7 @@ export async function GET() {
       },
     }
   );
-  const data = (await res.json()) as UpcomingMoviesResult;
+  const movies = (await res.json()) as UpcomingMoviesResult;
 
-  return Response.json(data);
+  return Response.json({ movies }, { status: 200 });
 }
