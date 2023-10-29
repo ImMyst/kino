@@ -1,10 +1,10 @@
 import { FALLBACK_URL_IMAGE } from "@app/constants";
 import { MovieDetail, type UpcomingMovie } from "@app/types";
-import Link from "next/link";
+import { Link } from "@remix-run/react";
 
 export default function MovieCard(movie: UpcomingMovie | MovieDetail) {
   return (
-    <Link href={`/movie/${movie.id}`}>
+    <Link to={`/movie/${movie.id}`}>
       <div
         key={movie.id}
         className="flex flex-col p-2 bg-blue-50 cursor-pointer hover:bg-blue-100 transition-colors shadow-sm rounded-md"
