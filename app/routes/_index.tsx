@@ -1,6 +1,6 @@
 import MovieCard from "@app/components/MovieCard";
-import { TMDB_API_URL } from "@app/constants";
-import { UpcomingMoviesResult } from "@app/types";
+import { TMDB_API_URL } from "@app/types/constants";
+import { UpcomingMoviesResult } from "@app/types/types";
 import { json, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 

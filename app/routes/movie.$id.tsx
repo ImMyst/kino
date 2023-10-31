@@ -1,8 +1,8 @@
 import MovieCard from "@app/components/MovieCard";
 import ReturnButton from "@app/components/ReturnButton";
-import { TMDB_API_URL } from "@app/constants";
-import type { MovieDetail } from "@app/types";
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { TMDB_API_URL } from "@app/types/constants";
+import type { MovieDetail } from "@app/types/types";
+import { type LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 export async function loader({ params }: LoaderFunctionArgs) {

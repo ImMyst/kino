@@ -1,5 +1,5 @@
-import { FALLBACK_URL_IMAGE } from "@app/constants";
-import { MovieDetail, type UpcomingMovie } from "@app/types";
+import { FALLBACK_URL_IMAGE } from "@app/types/constants";
+import { MovieDetail, type UpcomingMovie } from "@app/types/types";
 import { Link } from "@remix-run/react";
 
 export default function MovieCard(movie: UpcomingMovie | MovieDetail) {
