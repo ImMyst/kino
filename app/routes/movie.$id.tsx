@@ -1,18 +1,12 @@
 import MovieCard from "@app/components/MovieCard";
 import ReturnButton from "@app/components/ReturnButton";
-import { TMDB_API_URL } from "@app/types/constants";
 import type { MovieDetail } from "@app/types/types";
+import { getMovieDetail } from "@app/utils/endpoints";
 import { type LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const res = await fetch(`${TMDB_API_URL}/movie/${params.id}?language=fr-FR`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-  });
+  const res = await getMovieDetail({ movieId: params.id });
   const movie: MovieDetail = await res.json();
   return json({ movie });
 }

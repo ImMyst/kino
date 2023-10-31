@@ -1,6 +1,6 @@
 import MovieCard from "@app/components/MovieCard";
-import { TMDB_API_URL } from "@app/types/constants";
 import { UpcomingMoviesResult } from "@app/types/types";
+import { getUpcomingMovieList } from "@app/utils/endpoints";
 import { json, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
@@ -15,16 +15,7 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader() {
-  const res = await fetch(
-    `${TMDB_API_URL}/movie/upcoming?language=fr-FR&page=1&region=FR`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await getUpcomingMovieList();
   const movies: UpcomingMoviesResult = await res.json();
   return json({ movies });
 }
