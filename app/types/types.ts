@@ -1,3 +1,14 @@
+export type UpcomingMoviesResult = {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
+  page: number;
+  results: UpcomingMovie[];
+  total_pages: number;
+  total_results: number;
+};
+
 export type UpcomingMovie = {
   adult: boolean;
   backdrop_path: string | null;
@@ -13,17 +24,6 @@ export type UpcomingMovie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
-};
-
-export type UpcomingMoviesResult = {
-  dates: {
-    maximum: string;
-    minimum: string;
-  };
-  page: number;
-  results: UpcomingMovie[];
-  total_pages: number;
-  total_results: number;
 };
 
 export type MovieDetail = {
