@@ -11,7 +11,7 @@ export default function ReturnButton(props: TProps) {
 
   return (
     <Link
-      className="absolute top-4 left-4 text-center bg-blue-50 hover:bg-blue-100 transition-colors h-10 w-10
+      className="absolute top-4 left-4 text-center bg-gray-50 hover:bg-gray-100 transition-colors h-10 w-10
       flex items-center justify-center rounded-full p-2"
       to={to}
     >
