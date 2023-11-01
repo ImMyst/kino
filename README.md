@@ -7,3 +7,5 @@
 - Remix
 - Tailwind
 - TMDB API
+
+Made with ❤️
