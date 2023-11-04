@@ -1,5 +1,6 @@
 import MovieCard from "@app/components/MovieCard";
 import { UpcomingMoviesResult } from "@app/types/types";
+import { cn } from "@app/utils/cn";
 import { getUpcomingMovieList } from "@app/utils/endpoints";
 import { json, type MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -30,10 +31,18 @@ export default function Index() {
   });
 
   return (
-    <main className="flex flex-wrap justify-center gap-10 p-12">
-      {sortedMovies.map((movie) => (
-        <MovieCard {...movie} key={movie.id} />
-      ))}
+    <main
+      className={cn("flex flex-wrap justify-center gap-10 p-12", {
+        "h-screen": sortedMovies.length <= 0,
+      })}
+    >
+      {sortedMovies.length ? (
+        sortedMovies.map((movie) => <MovieCard {...movie} key={movie.id} />)
+      ) : (
+        <span className="flex items-center font-semibold text-center text-2xl justify-center">
+          Pas de films disponibles pour le moment
+        </span>
+      )}
     </main>
   );
 }
