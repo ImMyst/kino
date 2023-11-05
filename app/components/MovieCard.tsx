@@ -7,7 +7,7 @@ import { Link } from "@remix-run/react";
 
 export default function MovieCard(movie: UpcomingMovie | MovieDetail) {
   return (
-    <Link prefetch="render" to={`/movie/${movie.id}`}>
+    <Link prefetch="intent" to={`/movie/${movie.id}`}>
       <div
         key={movie.id}
         className="p-2 bg-gray-50 hover:bg-gray-100 transition-colors shadow-sm rounded-xl"
