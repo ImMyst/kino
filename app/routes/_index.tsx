@@ -1,5 +1,5 @@
 import MovieCard from "@app/components/MovieCard";
-import { UpcomingMoviesResult } from "@app/types/types";
+import type { UpcomingMoviesResult } from "@app/types/types";
 import { cn } from "@app/utils/cn";
 import { getUpcomingMovieList } from "@app/utils/endpoints";
 import { json, type MetaFunction } from "@remix-run/node";
