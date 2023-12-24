@@ -70,9 +70,9 @@ export default function MovieCard({
           {new Date(movie.release_date).toLocaleDateString("fr-FR")}
         </span>
         {directors?.length && (
-          <div className="text-center mt-2">
+          <div className="text-center flex gap-1 flex-wrap mt-2">
             {directors.map((director) => (
-              <Badge variant="red" key={director.id} className="ml-1.5">
+              <Badge variant="red" key={director.id}>
                 {director.name}
               </Badge>
             ))}
