@@ -26,7 +26,7 @@ export type UpcomingMovie = {
   vote_count: number;
 };
 
-export type MovieDetail = {
+type MovieDetail = {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection?: {
@@ -72,4 +72,56 @@ export type MovieDetail = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+};
+
+export type Movie = MovieDetail & MovieCredit;
+
+export type MovieCredit = {
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+};
+
+export type Cast = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+};
+
+export type Crew = {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  credit_id: string;
+  department:
+    | "Acting"
+    | "Directing"
+    | "Sound"
+    | "Production"
+    | "Writing"
+    | "Costume & Make-Up";
+  job:
+    | "Director"
+    | "Actor"
+    | "Editor"
+    | "Original Music Composer"
+    | "Executive Producer"
+    | "Writer"
+    | "Producer"
+    | "Costume Design"
+    | "Executive Producer";
 };

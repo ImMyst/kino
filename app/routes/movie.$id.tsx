@@ -1,13 +1,26 @@
 import MovieCard from "@app/components/MovieCard";
 import ReturnButton from "@app/components/ReturnButton";
-import type { MovieDetail } from "@app/types/types";
-import { getMovieDetail } from "@app/utils/endpoints";
+import type { MovieCredit, Movie } from "@app/types/types";
+import { getMovieDetail, getMovieDetailCredit } from "@app/utils/endpoints";
 import { type LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  const res = await getMovieDetail({ movieId: params.id });
-  const movie: MovieDetail = await res.json();
+  const movieDetailResponse = await getMovieDetail({ movieId: params.id });
+  const movieCreditResponse = await getMovieDetailCredit({
+    movieId: params.id,
+  });
+
+  const movieDetail: Movie = await movieDetailResponse.json();
+  const movieCredit: MovieCredit = await movieCreditResponse.json();
+
+  const movie = {
+    ...movieDetail,
+    id: movieDetail.id,
+    cast: movieCredit.cast,
+    crew: movieCredit.crew,
+  };
+
   return json({ movie });
 }
 

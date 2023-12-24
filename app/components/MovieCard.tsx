@@ -1,11 +1,15 @@
 import Badge from "@app/components/Badge";
 import { FALLBACK_URL_IMAGE } from "@app/types/constants";
-import { type MovieDetail, type UpcomingMovie } from "@app/types/types";
+import { type Crew, type Movie, type UpcomingMovie } from "@app/types/types";
 import { cn } from "@app/utils/cn";
 import { convertMinutesToHoursAndMinutes } from "@app/utils/functions";
 import { Link } from "@remix-run/react";
 
-export default function MovieCard(movie: UpcomingMovie | MovieDetail) {
+export default function MovieCard(movie: UpcomingMovie | Movie) {
+  const directors = (movie as Movie).crew?.filter(
+    (c) => c.job === "Director"
+  ) as Crew[] | undefined;
+
   return (
     <Link prefetch="intent" to={`/movie/${movie.id}`}>
       <div
@@ -22,9 +26,9 @@ export default function MovieCard(movie: UpcomingMovie | MovieDetail) {
                     }`
                   : FALLBACK_URL_IMAGE
               }
-              className={cn("object-contain rounded-lg min-w-full", {
-                "w-52": "genre_ids" in movie,
-                "w-64": "genres" in movie,
+              className={cn("object-cover cover rounded-lg min-w-full", {
+                "w-52 h-64": "genre_ids" in movie,
+                "w-80 h-96": "genres" in movie,
               })}
               alt={
                 movie.poster_path || movie.backdrop_path
@@ -45,6 +49,16 @@ export default function MovieCard(movie: UpcomingMovie | MovieDetail) {
           <span className="text-sm text-gray-500">
             {new Date(movie.release_date).toLocaleDateString("fr-FR")}
           </span>
+          {directors?.length && (
+            <div className="text-center mt-2">
+              <span className="font-semibold">De:</span>
+              {directors.map((director) => (
+                <span key={director.id} className="ml-1.5">
+                  {director.name}
+                </span>
+              ))}
+            </div>
+          )}
         </section>
         {"genres" in movie && (
           <div className="flex max-w-xs mt-4 gap-2 justify-center flex-wrap">
