@@ -1,14 +1,20 @@
 import Badge from "@app/components/Badge";
 import { FALLBACK_URL_IMAGE } from "@app/types/constants";
-import { type Crew, type Movie, type UpcomingMovie } from "@app/types/types";
+import { type Movie, type UpcomingMovie } from "@app/types/types";
 import { cn } from "@app/utils/cn";
 import { convertMinutesToHoursAndMinutes } from "@app/utils/functions";
 import { Link } from "@remix-run/react";
 
-export default function MovieCard(movie: UpcomingMovie | Movie) {
-  const directors = (movie as Movie).crew?.filter(
-    (c) => c.job === "Director"
-  ) as Crew[] | undefined;
+export default function MovieCard({
+  movie,
+  isDetail = false,
+}: {
+  movie: UpcomingMovie | Movie;
+  isDetail?: boolean;
+}) {
+  const directors = isDetail
+    ? (movie as Movie).crew?.filter((c) => c.job === "Director")
+    : undefined;
 
   return (
     <Link prefetch="intent" to={`/movie/${movie.id}`}>
@@ -27,8 +33,8 @@ export default function MovieCard(movie: UpcomingMovie | Movie) {
                   : FALLBACK_URL_IMAGE
               }
               className={cn("object-cover cover rounded-lg min-w-full", {
-                "w-52 h-64": "genre_ids" in movie,
-                "w-80 h-96": "genres" in movie,
+                "w-52 h-64": !isDetail,
+                "w-80 h-96": isDetail,
               })}
               alt={
                 movie.poster_path || movie.backdrop_path
@@ -60,9 +66,9 @@ export default function MovieCard(movie: UpcomingMovie | Movie) {
             </div>
           )}
         </section>
-        {"genres" in movie && (
+        {isDetail && (
           <div className="flex max-w-xs mt-4 gap-2 justify-center flex-wrap">
-            {movie.genres.map((genre) => (
+            {(movie as Movie).genres.map((genre) => (
               <Badge key={genre.id}>{genre.name}</Badge>
             ))}
           </div>

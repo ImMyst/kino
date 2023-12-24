@@ -37,7 +37,7 @@ export default function Index() {
       })}
     >
       {sortedMovies.length ? (
-        sortedMovies.map((movie) => <MovieCard {...movie} key={movie.id} />)
+        sortedMovies.map((movie) => <MovieCard movie={movie} key={movie.id} />)
       ) : (
         <span className="flex items-center font-semibold text-center text-2xl justify-center">
           Pas de films disponibles pour le moment

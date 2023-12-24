@@ -35,7 +35,7 @@ export default function MovieDetail() {
       >
         Retour
       </Link>
-      <MovieCard {...movie} />
+      <MovieCard isDetail={true} movie={movie} />
       <span>{movie.overview}</span>
     </main>
   );
