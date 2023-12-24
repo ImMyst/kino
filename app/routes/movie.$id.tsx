@@ -29,7 +29,7 @@ export default function MovieDetail() {
   return (
     <main className="relative flex flex-col items-center justify-center gap-10 p-12 max-w-screen-lg mx-auto">
       <Link
-        className="absolute top-4 left-4 text-center bg-gray-100 hover:bg-gray-200 transition-colors
+        className="absolute top-4 left-4 font-semibold text-center bg-gray-100 hover:bg-gray-200 transition-colors
       flex items-center justify-center rounded-full p-2 px-4"
         to={"/"}
       >

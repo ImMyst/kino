@@ -16,6 +16,10 @@ export default function MovieCard({
     ? (movie as Movie).crew?.filter((c) => c.job === "Director")
     : undefined;
 
+  const actors = isDetail
+    ? (movie as Movie).cast.sort((a, b) => a.order - b.order).slice(0, 7)
+    : undefined;
+
   return (
     <Link prefetch="intent" to={`/movie/${movie.id}`}>
       <div
@@ -65,9 +69,20 @@ export default function MovieCard({
               ))}
             </div>
           )}
+          {actors?.length && (
+            <div className="flex flex-wrap max-w-xs text-center justify-center mt-3">
+              <span className="font-semibold mr-1.5">Avec:</span>
+              {actors.map((actor, index) => (
+                <span key={actor.id}>
+                  {actor.name}
+                  {index !== actors.length - 1 && ", "}
+                </span>
+              ))}
+            </div>
+          )}
         </section>
         {isDetail && (
-          <div className="flex max-w-xs mt-4 gap-2 justify-center flex-wrap">
+          <div className="flex max-w-xs mt-4 gap-2 self-center justify-center flex-wrap">
             {(movie as Movie).genres.map((genre) => (
               <Badge key={genre.id}>{genre.name}</Badge>
             ))}
