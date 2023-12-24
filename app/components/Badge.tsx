@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 type TProps = {
   className?: string;
-  variant?: "default" | "blurred";
+  variant?: "default" | "blue" | "red" | "blurred";
   children: ReactNode;
 };
 
@@ -17,8 +17,12 @@ export default function Badge(props: TProps) {
         "focus:ring-2 focus:ring-ring focus:ring-offset-2",
         "shadow",
         {
-          "bg-blue-100 text-blue-900 border-blue-300 hover:bg-blue-100/80":
+          "bg-gray-100 text-gray-900 border-gray-300 hover:bg-gray-100/80":
             variant === "default",
+          "bg-blue-100 text-blue-900 border-blue-300 hover:bg-blue-100/80":
+            variant === "blue",
+          "bg-yellow-100 text-yellow-900 border-yellow-300 hover:bg-yellow-100/80":
+            variant === "red",
           "backdrop-blur-md bg-white/60 border-white text-black":
             variant === "blurred",
         },

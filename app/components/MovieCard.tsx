@@ -24,7 +24,9 @@ export default function MovieCard({
     <Link prefetch="intent" to={`/movie/${movie.id}`}>
       <div
         key={movie.id}
-        className="p-2 bg-gray-50 hover:bg-gray-100 transition-colors shadow-sm rounded-xl"
+        className={cn("p-2 bg-gray-50 transition-colors shadow-sm rounded-xl", {
+          "hover:bg-gray-100": !isDetail,
+        })}
       >
         <section className="flex justify-center text-center items-center flex-col">
           <div className="relative">
@@ -61,30 +63,27 @@ export default function MovieCard({
           </span>
           {directors?.length && (
             <div className="text-center mt-2">
-              <span className="font-semibold">De:</span>
               {directors.map((director) => (
-                <span key={director.id} className="ml-1.5">
+                <Badge variant="red" key={director.id} className="ml-1.5">
                   {director.name}
-                </span>
+                </Badge>
               ))}
             </div>
           )}
           {actors?.length && (
-            <div className="flex flex-wrap max-w-xs text-center justify-center mt-3">
-              <span className="font-semibold mr-1.5">Avec:</span>
-              {actors.map((actor, index) => (
-                <span key={actor.id}>
-                  {actor.name}
-                  {index !== actors.length - 1 && ", "}
-                </span>
+            <div className="flex flex-wrap gap-1 max-w-xs text-center justify-center mt-4">
+              {actors.map((actor) => (
+                <Badge key={actor.id}>{actor.name}</Badge>
               ))}
             </div>
           )}
         </section>
         {isDetail && (
-          <div className="flex max-w-xs mt-4 gap-2 self-center justify-center flex-wrap">
+          <div className="flex max-w-xs mt-6 gap-2 self-center justify-center flex-wrap">
             {(movie as Movie).genres.map((genre) => (
-              <Badge key={genre.id}>{genre.name}</Badge>
+              <Badge variant="blue" key={genre.id}>
+                {genre.name}
+              </Badge>
             ))}
           </div>
         )}
