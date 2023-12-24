@@ -25,6 +25,7 @@ export default function MovieCard({
       key={movie.id}
       className={cn("p-2 bg-gray-50 transition-colors shadow-sm rounded-xl", {
         "hover:bg-gray-100": !isDetail,
+        "cursor-auto": isDetail,
       })}
     >
       <section className="flex justify-center text-center items-center flex-col">
@@ -54,8 +55,18 @@ export default function MovieCard({
           )}
         </div>
 
-        <span className="font-semibold max-w-[200px] mt-2">{movie.title}</span>
-        <span className="text-sm text-gray-500">
+        <span
+          className={cn("font-semibold max-w-[200px] mt-2", {
+            "text-2xl": isDetail,
+          })}
+        >
+          {movie.title}
+        </span>
+        <span
+          className={cn("text-gray-500", {
+            "text-sm": !isDetail,
+          })}
+        >
           {new Date(movie.release_date).toLocaleDateString("fr-FR")}
         </span>
         {directors?.length && (
