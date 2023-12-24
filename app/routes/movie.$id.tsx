@@ -27,18 +27,18 @@ export default function MovieDetail() {
   const { movie } = useLoaderData<typeof loader>();
 
   return (
-    <main className="relative grid grid-cols-12 gap-4 pt-16 max-w-screen-lg mx-auto">
+    <main className="relative flex flex-col md:grid md:grid-cols-12 gap-4 pt-16 px-4 md:px-0 max-w-screen-lg mx-auto">
       <Link
-        className="absolute top-2 font-semibold text-center bg-gray-100 hover:bg-gray-200 transition-colors
+        className="absolute top-2 left-2 font-semibold text-center bg-gray-100 hover:bg-gray-200 transition-colors
       flex items-center justify-center rounded-full p-2 px-4"
         to={"/"}
       >
         Retour
       </Link>
-      <div className="col-span-4">
+      <div className="md:col-span-6 lg:col-span-4">
         <MovieCard isDetail={true} movie={movie} />
       </div>
-      <div className="col-span-8 bg-gray-50 shadow-sm rounded-xl py-2 px-4">
+      <div className="md:col-span-6 lg:col-span-8 bg-gray-50 shadow-sm rounded-xl py-2 px-4">
         <span>{movie.overview}</span>
       </div>
     </main>
