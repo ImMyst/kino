@@ -1,9 +1,8 @@
 import MovieCard from "@app/components/MovieCard";
-import ReturnButton from "@app/components/ReturnButton";
 import type { MovieCredit, Movie } from "@app/types/types";
 import { getMovieDetail, getMovieDetailCredit } from "@app/utils/endpoints";
 import { type LoaderFunctionArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const movieDetailResponse = await getMovieDetail({ movieId: params.id });
@@ -29,7 +28,13 @@ export default function MovieDetail() {
 
   return (
     <main className="relative flex flex-col items-center justify-center gap-10 p-12 max-w-screen-lg mx-auto">
-      <ReturnButton to="/">{"<"}</ReturnButton>
+      <Link
+        className="absolute top-4 left-4 text-center bg-gray-100 hover:bg-gray-200 transition-colors
+      flex items-center justify-center rounded-full p-2 px-4"
+        to={"/"}
+      >
+        Retour
+      </Link>
       <MovieCard {...movie} />
       <span>{movie.overview}</span>
     </main>
