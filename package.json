@@ -29,6 +29,7 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
+    "@tanstack/devtools-vite": "^0.3.3",
     "@netlify/vite-plugin-tanstack-start": "^1.0.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
