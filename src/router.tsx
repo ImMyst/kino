@@ -6,8 +6,7 @@ import { NotFound } from "@/components/NotFound";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
-// Create a new router instance
-export const getRouter = () => {
+export function getRouter() {
   const queryClient = new QueryClient();
 
   const router = createRouter({
@@ -23,7 +22,7 @@ export const getRouter = () => {
   });
 
   return router;
-};
+}
 
 declare module "@tanstack/react-router" {
   interface Register {

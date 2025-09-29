@@ -1,11 +1,16 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router';
+import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanstackDevtools } from '@tanstack/react-devtools';
 
 import appCss from '../styles.css?url';
 import { ReactNode } from 'react';
+import { QueryClient } from '@tanstack/react-query';
+import { DefaultCatchBoundary } from '@/components/DefaultCatchBoundary';
+import { NotFound } from '@/components/NotFound';
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient
+}>()({
   head: () => ({
     meta: [
       {
@@ -28,15 +33,18 @@ export const Route = createRootRoute({
   }),
 
   shellComponent: RootDocument,
+
+  errorComponent: DefaultCatchBoundary,
+  notFoundComponent: () => <NotFound />,
 })
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning lang="en">
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <TanstackDevtools
           config={{
