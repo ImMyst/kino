@@ -1,6 +1,4 @@
 import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
-import { TanstackDevtools } from '@tanstack/react-devtools';
 
 import appCss from '../styles.css?url';
 import { ReactNode } from 'react';
@@ -46,17 +44,6 @@ function RootDocument({ children }: { children: ReactNode }) {
       </head>
       <body suppressHydrationWarning>
         {children}
-        <TanstackDevtools
-          config={{
-            position: 'bottom-left',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
         <Scripts />
       </body>
     </html>

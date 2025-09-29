@@ -15,11 +15,8 @@
   "dependencies": {
     "@biomejs/biome": "2.2.3",
     "@tailwindcss/vite": "^4.0.6",
-    "@tanstack/react-devtools": "^0.2.2",
     "@tanstack/react-query": "^5.90.2",
-    "@tanstack/react-query-devtools": "^5.90.2",
     "@tanstack/react-router": "^1.132.0",
-    "@tanstack/react-router-devtools": "^1.132.0",
     "@tanstack/react-router-ssr-query": "^1.131.7",
     "@tanstack/react-start": "^1.132.0",
     "@tanstack/router-plugin": "^1.132.0",
@@ -29,7 +26,6 @@
     "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
-    "@tanstack/devtools-vite": "^0.3.3",
     "@netlify/vite-plugin-tanstack-start": "^1.0.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
