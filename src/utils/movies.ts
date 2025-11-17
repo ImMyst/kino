@@ -50,6 +50,25 @@ export const getMovieDetail = createServerFn()
     return json;
   });
 
+export const getMovieCredits = createServerFn()
+  .inputValidator((data: { movieId: string }) => data)
+  .handler(async ({ data: { movieId } }) => {
+    const response = await fetch(
+      `${TMDB_API_URL}/movie/${movieId}/credits?language=fr-FR`,
+      {
+        method: "GET",
+        headers,
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error fetching movie credits: ${response.statusText}`);
+    }
+
+    const json = (await response.json()) as TMovie;
+    return json;
+  });
+
 export const moviesQueryOptions = () => {
   return queryOptions({
     queryKey: queryKeys.movies.list(),
@@ -61,5 +80,12 @@ export const movieDetailQueryOptions = ({ movieId }: { movieId: string }) => {
   return queryOptions({
     queryKey: queryKeys.movies.detail(movieId),
     queryFn: () => getMovieDetail({ data: { movieId } }),
+  });
+};
+
+export const movieCastQueryOptions = ({ movieId }: { movieId: string }) => {
+  return queryOptions({
+    queryKey: queryKeys.movies.cast(movieId),
+    queryFn: () => getMovieCredits({ data: { movieId } }),
   });
 };

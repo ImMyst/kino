@@ -1,30 +1,33 @@
-import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
-
-import appCss from '../styles.css?url';
-import { ReactNode } from 'react';
-import { QueryClient } from '@tanstack/react-query';
-import { DefaultCatchBoundary } from '@/components/DefaultCatchBoundary';
-import { NotFound } from '@/components/NotFound';
+import type { QueryClient } from "@tanstack/react-query";
+import {
+  createRootRouteWithContext,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
+import type { ReactNode } from "react";
+import { DefaultCatchBoundary } from "@/components/DefaultCatchBoundary";
+import { NotFound } from "@/components/NotFound";
+import appCss from "../styles.css?url";
 
 export const Route = createRootRouteWithContext<{
-  queryClient: QueryClient
+  queryClient: QueryClient;
 }>()({
   head: () => ({
     meta: [
       {
-        charSet: 'utf-8',
+        charSet: "utf-8",
       },
       {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
       },
       {
-        title: 'TanStack Start Starter',
+        title: "TanStack Start Starter",
       },
     ],
     links: [
       {
-        rel: 'stylesheet',
+        rel: "stylesheet",
         href: appCss,
       },
     ],
@@ -34,7 +37,7 @@ export const Route = createRootRouteWithContext<{
 
   errorComponent: DefaultCatchBoundary,
   notFoundComponent: () => <NotFound />,
-})
+});
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
@@ -47,5 +50,5 @@ function RootDocument({ children }: { children: ReactNode }) {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }
