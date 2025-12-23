@@ -38,7 +38,7 @@ function RouteComponent() {
       <img
         width={200}
         src={
-          movie.poster_path || movie.backdrop_path
+          movie.poster_path && movie.backdrop_path
             ? `https://image.tmdb.org/t/p/original/${
                 movie.poster_path ?? movie.backdrop_path
               }`
@@ -49,12 +49,6 @@ function RouteComponent() {
       <div className="flex items-center flex-col gap-1">
         <h1 className="text-2xl font-bold">{movie.title}</h1>
         <p className="text-sm">{director?.name ?? "N/A"}</p>
-        {/* <a
-          href={getLetterboxdLink(movie)}
-          className="underline hover:decoration-blue-500"
-        >
-          Letterboxd
-        </a> */}
         <p>{new Date(movie.release_date).toLocaleDateString("fr-FR")}</p>
         {movie.genres.length > 0 && (
           <p className="flex gap-1">

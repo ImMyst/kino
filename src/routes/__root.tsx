@@ -41,12 +41,16 @@ export const Route = createRootRouteWithContext<{
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html
+      suppressHydrationWarning
+      lang="en"
+      className="min-h-screen bg-linear-to-b from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 text-neutral-900 dark:text-neutral-100"
+    >
       <head>
         <HeadContent />
       </head>
       <body suppressHydrationWarning>
-        {children}
+        <div className="py-4">{children}</div>
         <Scripts />
       </body>
     </html>
