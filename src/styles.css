@@ -1,15 +1,120 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
+
+/* Polices personnalisées - Nohemi */
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/nohemi/Nohemi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/nohemi/Nohemi-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/nohemi/Nohemi-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Animations personnalisées */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Classes utilitaires */
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.3s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Styles de base */
 body {
-  @apply m-0;
+  margin: 0;
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typographie - Nohemi pour les titres */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nohemi", sans-serif;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 code {
   font-family:
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Utilities pour les polices */
+@layer utilities {
+  .font-nohemi {
+    font-family: "Nohemi", sans-serif;
+  }
+
+  .font-outfit {
+    font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
+
+/* Focus states accessibles */
+*:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgb(0 0 0),
+    0 0 0 4px rgb(249 115 22);
 }

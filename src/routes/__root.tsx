@@ -27,6 +27,19 @@ export const Route = createRootRouteWithContext<{
     ],
     links: [
       {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap",
+      },
+      {
         rel: "stylesheet",
         href: appCss,
       },
@@ -50,7 +63,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body suppressHydrationWarning>
-        <div className="py-4">{children}</div>
+        <div>{children}</div>
         <Scripts />
       </body>
     </html>
