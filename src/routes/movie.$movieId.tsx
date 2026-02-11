@@ -31,10 +31,6 @@ export const Route = createFileRoute("/movie/$movieId")({
 function RouteComponent() {
   const params = Route.useParams();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
-
   const { data: movie } = useSuspenseQuery(
     movieDetailQueryOptions({ movieId: params.movieId }),
   );
@@ -42,6 +38,12 @@ function RouteComponent() {
   const { data: cast } = useSuspenseQuery(
     movieCastQueryOptions({ movieId: params.movieId }),
   );
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Mettre à jour le titre de la page
+    document.title = `Kino - ${movie.title}`;
+  }, [movie.title]);
 
   const director = cast.crew.find((crew) => crew.job === "Director");
   const backdropUrl = movie.backdrop_path
