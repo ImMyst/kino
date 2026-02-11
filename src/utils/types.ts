@@ -24,6 +24,7 @@ export type TUpcomingMovie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  director: string | null;
 };
 
 type TMovieDetail = {

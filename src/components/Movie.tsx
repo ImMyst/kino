@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { StarRating } from "@/components/StarRating";
 import type { TUpcomingMovie } from "@/utils/types";
 
 export function Movie({ movie }: { movie: TUpcomingMovie }) {
@@ -50,12 +49,14 @@ export function Movie({ movie }: { movie: TUpcomingMovie }) {
 
           {/* Overlay au survol avec informations */}
           <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-            <div className="flex items-center justify-between">
-              <StarRating rating={movie.vote_average} size="sm" />
-              <span className="text-xs text-neutral-300">
-                {movie.vote_count} votes
-              </span>
-            </div>
+            {movie.director && (
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-neutral-400">Réalisé par</span>
+                <span className="text-sm font-semibold text-white">
+                  {movie.director}
+                </span>
+              </div>
+            )}
           </div>
         </div>
 

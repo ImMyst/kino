@@ -20,7 +20,38 @@ export const fetchMovies = createServerFn().handler(async () => {
 
   const json = (await response.json()) as TUpcomingMoviesResult;
 
-  const movies = json.results.sort(
+  // Récupérer le réalisateur pour chaque film
+  const moviesWithDirector = await Promise.all(
+    json.results.map(async (movie) => {
+      try {
+        const creditsResponse = await fetch(
+          `${TMDB_API_URL}/movie/${movie.id}/credits?language=fr-FR`,
+          {
+            method: "GET",
+            headers,
+          },
+        );
+        const credits = (await creditsResponse.json()) as {
+          crew: { job: string; name: string }[];
+        };
+        const director = credits.crew.find(
+          (member) => member.job === "Director",
+        );
+
+        return {
+          ...movie,
+          director: director?.name || null,
+        };
+      } catch (error) {
+        return {
+          ...movie,
+          director: null,
+        };
+      }
+    }),
+  );
+
+  const movies = moviesWithDirector.sort(
     (a, b) =>
       new Date(a.release_date).getTime() - new Date(b.release_date).getTime(),
   );
