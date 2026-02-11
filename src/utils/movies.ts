@@ -122,10 +122,19 @@ export const fetchMoviesByWeek = createServerFn()
       }),
     );
 
-    const movies = moviesWithDirector.sort(
-      (a, b) =>
-        new Date(a.release_date).getTime() - new Date(b.release_date).getTime(),
-    );
+    // Trier par date de sortie d'abord, puis par popularité
+    const movies = moviesWithDirector.sort((a, b) => {
+      const dateA = new Date(a.release_date).getTime();
+      const dateB = new Date(b.release_date).getTime();
+
+      // Si même date, trier par popularité (descendant)
+      if (dateA === dateB) {
+        return b.popularity - a.popularity;
+      }
+
+      // Sinon, trier par date (ascendant)
+      return dateA - dateB;
+    });
 
     return {
       ...json,
