@@ -42,6 +42,7 @@ export function ClockIcon({ className = "w-4 h-4" }: { className?: string }) {
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
+      <title>Clock</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -64,6 +65,7 @@ export function CalendarIcon({
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
+      <title>Calendar</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -86,6 +88,7 @@ export function LanguageIcon({
       viewBox="0 0 24 24"
       stroke="currentColor"
     >
+      <title>Language</title>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
