@@ -1,10 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
 import { useEffect } from "react";
-
-dayjs.extend(duration);
 
 import { CastCard } from "@/components/CastCard";
 import {
