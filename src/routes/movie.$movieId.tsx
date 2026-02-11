@@ -1,7 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 import { useEffect } from "react";
+
+dayjs.extend(duration);
+
 import { CastCard } from "@/components/CastCard";
 import {
   CalendarIcon,
@@ -60,11 +64,19 @@ function RouteComponent() {
     dayjs(movie.release_date).year(),
   );
 
-  // Formater la durée (ex: 142 min -> 2h 22min)
+  // Formater la durée avec Day.js duration plugin
   const formatRuntime = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return hours > 0 ? `${hours}h ${mins}min` : `${mins}min`;
+    const d = dayjs.duration(minutes, "minutes");
+    const hours = d.hours();
+    const mins = d.minutes();
+
+    if (hours > 0 && mins > 0) {
+      return `${hours}h ${mins}min`;
+    }
+    if (hours > 0) {
+      return `${hours}h`;
+    }
+    return `${mins}min`;
   };
 
   return (
