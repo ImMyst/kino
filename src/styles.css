@@ -1,8 +1,6 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
-
-/* Polices personnalisées - Nohemi */
 @font-face {
   font-family: "Nohemi";
   src: url("/fonts/nohemi/Nohemi-Regular.woff2") format("woff2");
@@ -27,7 +25,6 @@
   font-display: swap;
 }
 
-/* Animations personnalisées */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -58,7 +55,6 @@
   }
 }
 
-/* Classes utilitaires */
 .animate-fadeIn {
   animation: fadeIn 0.4s ease-in-out;
 }
@@ -71,7 +67,7 @@
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Styles de base */
+html,
 body {
   margin: 0;
   font-family:
@@ -82,7 +78,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typographie - Nohemi pour les titres */
+body {
+  background: inherit;
+  min-height: 100vh;
+}
+
 h1,
 h2,
 h3,
@@ -100,7 +100,6 @@ code {
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Utilities pour les polices */
 @layer utilities {
   .font-nohemi {
     font-family: "Nohemi", sans-serif;
@@ -111,7 +110,6 @@ code {
   }
 }
 
-/* Focus states accessibles */
 *:focus-visible {
   outline: none;
   box-shadow:
