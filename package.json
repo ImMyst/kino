@@ -20,7 +20,6 @@
     "@tanstack/react-router-ssr-query": "^1.133.36",
     "@tanstack/react-start": "^1.133.37",
     "@tanstack/router-plugin": "^1.133.36",
-    "arktype": "^2.1.29",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwindcss": "^4.1.16",
