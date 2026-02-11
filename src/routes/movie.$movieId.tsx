@@ -1,5 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import dayjs from "dayjs";
 import { useEffect } from "react";
 import { CastCard } from "@/components/CastCard";
 import {
@@ -56,7 +57,7 @@ function RouteComponent() {
   // Générer l'URL Letterboxd
   const letterboxdUrl = getLetterboxdSearchUrl(
     movie.title,
-    new Date(movie.release_date).getFullYear(),
+    dayjs(movie.release_date).year(),
   );
 
   // Formater la durée (ex: 142 min -> 2h 22min)
@@ -134,7 +135,7 @@ function RouteComponent() {
                 </p>
               )}
               <p className="text-xl text-neutral-300 font-outfit">
-                {new Date(movie.release_date).getFullYear()}
+                {dayjs(movie.release_date).year()}
               </p>
             </div>
 
@@ -150,10 +151,7 @@ function RouteComponent() {
                 )}
                 <MovieBadge
                   icon={<CalendarIcon className="w-3.5 h-3.5" />}
-                  label={new Date(movie.release_date).toLocaleDateString(
-                    "fr-FR",
-                    { day: "numeric", month: "long", year: "numeric" },
-                  )}
+                  label={dayjs(movie.release_date).format("D MMMM YYYY")}
                   variant="default"
                 />
                 {movie.original_language && (

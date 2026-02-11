@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import dayjs from "dayjs";
 import type { TUpcomingMovie } from "@/utils/types";
 
 export function Movie({ movie }: { movie: TUpcomingMovie }) {
@@ -9,11 +10,9 @@ export function Movie({ movie }: { movie: TUpcomingMovie }) {
       : "";
 
   // Calculer si le film est nouveau (sortie dans les 7 prochains jours)
-  const releaseDate = new Date(movie.release_date);
-  const today = new Date();
-  const daysDiff = Math.ceil(
-    (releaseDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
-  );
+  const releaseDate = dayjs(movie.release_date);
+  const today = dayjs();
+  const daysDiff = releaseDate.diff(today, "day");
   const isNew = daysDiff >= 0 && daysDiff <= 7;
 
   return (
@@ -66,11 +65,7 @@ export function Movie({ movie }: { movie: TUpcomingMovie }) {
             {movie.title}
           </h3>
           <p className="text-sm text-neutral-400">
-            {new Date(movie.release_date).toLocaleDateString("fr-FR", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            })}
+            {dayjs(movie.release_date).format("D MMM YYYY")}
           </p>
         </div>
       </div>

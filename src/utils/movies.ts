@@ -1,5 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { createServerFn } from "@tanstack/react-start";
+import dayjs from "dayjs";
 import { TMDB_API_URL } from "@/utils/constants";
 import { getWeekEnd, toISODate } from "@/utils/dates";
 import { queryKeys } from "@/utils/query-keys";
@@ -53,8 +54,7 @@ export const fetchMovies = createServerFn().handler(async () => {
   );
 
   const movies = moviesWithDirector.sort(
-    (a, b) =>
-      new Date(a.release_date).getTime() - new Date(b.release_date).getTime(),
+    (a, b) => dayjs(a.release_date).unix() - dayjs(b.release_date).unix(),
   );
 
   return {
@@ -66,7 +66,7 @@ export const fetchMovies = createServerFn().handler(async () => {
 export const fetchMoviesByWeek = createServerFn()
   .inputValidator((data: { weekStart: string }) => data)
   .handler(async ({ data: { weekStart } }) => {
-    const startDate = new Date(weekStart);
+    const startDate = dayjs(weekStart).toDate();
     const endDate = getWeekEnd(startDate);
 
     // Utiliser l'endpoint discover pour filtrer par date de sortie exacte
@@ -124,8 +124,8 @@ export const fetchMoviesByWeek = createServerFn()
 
     // Trier par date de sortie d'abord, puis par popularité
     const movies = moviesWithDirector.sort((a, b) => {
-      const dateA = new Date(a.release_date).getTime();
-      const dateB = new Date(b.release_date).getTime();
+      const dateA = dayjs(a.release_date).unix();
+      const dateB = dayjs(b.release_date).unix();
 
       // Si même date, trier par popularité (descendant)
       if (dateA === dateB) {
