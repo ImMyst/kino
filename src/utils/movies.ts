@@ -1,6 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 import { createServerFn } from "@tanstack/react-start";
 import { TMDB_API_URL } from "@/utils/constants";
+import { getWeekEnd, toISODate } from "@/utils/dates";
 import { queryKeys } from "@/utils/query-keys";
 import type { TMovie, TUpcomingMoviesResult } from "@/utils/types";
 
@@ -42,7 +43,7 @@ export const fetchMovies = createServerFn().handler(async () => {
           ...movie,
           director: director?.name || null,
         };
-      } catch (error) {
+      } catch {
         return {
           ...movie,
           director: null,
@@ -61,6 +62,76 @@ export const fetchMovies = createServerFn().handler(async () => {
     results: movies,
   };
 });
+
+export const fetchMoviesByWeek = createServerFn()
+  .inputValidator((data: { weekStart: string }) => data)
+  .handler(async ({ data: { weekStart } }) => {
+    const startDate = new Date(weekStart);
+    const endDate = getWeekEnd(startDate);
+
+    // Utiliser l'endpoint discover pour filtrer par date de sortie exacte
+    // Cela fonctionne mieux que upcoming pour des semaines spécifiques
+    const startDateStr = toISODate(startDate);
+    const endDateStr = toISODate(endDate);
+
+    const url = new URL(`${TMDB_API_URL}/discover/movie`);
+    url.searchParams.set("language", "fr-FR");
+    url.searchParams.set("region", "FR");
+    url.searchParams.set("with_release_type", "2|3"); // 2=Theatrical limited, 3=Theatrical
+    url.searchParams.set("release_date.gte", startDateStr);
+    url.searchParams.set("release_date.lte", endDateStr);
+    url.searchParams.set("sort_by", "release_date.asc");
+
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      headers,
+    });
+
+    const json = (await response.json()) as TUpcomingMoviesResult;
+
+    const filteredResults = json.results;
+
+    // Récupérer le réalisateur pour chaque film
+    const moviesWithDirector = await Promise.all(
+      filteredResults.map(async (movie) => {
+        try {
+          const creditsResponse = await fetch(
+            `${TMDB_API_URL}/movie/${movie.id}/credits?language=fr-FR`,
+            {
+              method: "GET",
+              headers,
+            },
+          );
+          const credits = (await creditsResponse.json()) as {
+            crew: { job: string; name: string }[];
+          };
+          const director = credits.crew.find(
+            (member) => member.job === "Director",
+          );
+
+          return {
+            ...movie,
+            director: director?.name || null,
+          };
+        } catch {
+          return {
+            ...movie,
+            director: null,
+          };
+        }
+      }),
+    );
+
+    const movies = moviesWithDirector.sort(
+      (a, b) =>
+        new Date(a.release_date).getTime() - new Date(b.release_date).getTime(),
+    );
+
+    return {
+      ...json,
+      results: movies,
+    };
+  });
 
 export const getMovieDetail = createServerFn()
   .inputValidator((data: { movieId: string }) => data)
@@ -104,6 +175,13 @@ export const moviesQueryOptions = () => {
   return queryOptions({
     queryKey: queryKeys.movies.list(),
     queryFn: fetchMovies,
+  });
+};
+
+export const moviesByWeekQueryOptions = (weekStart: string) => {
+  return queryOptions({
+    queryKey: queryKeys.movies.byWeek(weekStart),
+    queryFn: () => fetchMoviesByWeek({ data: { weekStart } }),
   });
 };
 
