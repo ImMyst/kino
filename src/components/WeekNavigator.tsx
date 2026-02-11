@@ -40,11 +40,12 @@ export function WeekNavigator({
       <button
         onClick={handlePrevious}
         disabled={!canNavigatePrevious(currentWeekStart)}
-        className="px-4 py-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-300 dark:hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium text-sm"
+        className="px-3 sm:px-4 py-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-300 dark:hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium text-sm"
         aria-label="Semaine précédente"
         type="button"
       >
-        ← Précédente
+        <span className="sm:hidden">←</span>
+        <span className="hidden sm:inline">← Précédente</span>
       </button>
 
       <div className="flex flex-col items-center gap-1">
@@ -61,11 +62,12 @@ export function WeekNavigator({
       <button
         onClick={handleNext}
         disabled={!canNavigateNext(currentWeekStart)}
-        className="px-4 py-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-300 dark:hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium text-sm"
+        className="px-3 sm:px-4 py-2 rounded-lg bg-neutral-200 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-300 dark:hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium text-sm"
         aria-label="Semaine suivante"
         type="button"
       >
-        Suivante →
+        <span className="sm:hidden">→</span>
+        <span className="hidden sm:inline">Suivante →</span>
       </button>
     </div>
   );

@@ -79,7 +79,7 @@ function App() {
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
       <div className="mb-8 flex flex-col gap-6 animate-scaleUp">
-        <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-4xl md:text-5xl md:text-left text-center font-bold text-neutral-900 dark:text-neutral-100">
           Sorties cinéma
         </h1>
 

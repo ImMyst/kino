@@ -76,6 +76,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: rgb(23 23 23); /* neutral-900 */
+  }
 }
 
 body {
