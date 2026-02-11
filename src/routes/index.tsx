@@ -13,7 +13,6 @@ export const Route = createFileRoute("/")({
 function App() {
   const movies = useSuspenseQuery(moviesQueryOptions());
 
-  // Calculer les dates min et max pour le header
   const dates = movies.data.dates;
   const minDate = new Date(dates.minimum).toLocaleDateString("fr-FR", {
     day: "numeric",
@@ -27,9 +26,8 @@ function App() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Header de la page */}
       <div className="mb-8 flex flex-col gap-2 animate-scaleUp">
-        <h1 className="text-4xl md:text-5xl font-bold text-neutral-100">
+        <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-100">
           Sorties cinéma à venir
         </h1>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -43,7 +41,6 @@ function App() {
         </div>
       </div>
 
-      {/* Grille de films */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
         {movies.data.results.map((movie) => (
           <Movie movie={movie} key={movie.id} />
