@@ -34,7 +34,6 @@ export function MovieBadge({
   );
 }
 
-// Composants d'icônes SVG simples
 export function ClockIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
     <svg
@@ -93,45 +92,6 @@ export function LanguageIcon({
         strokeWidth={2}
         d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
       />
-    </svg>
-  );
-}
-
-export function StarIconSolid({
-  className = "w-4 h-4",
-}: {
-  className?: string;
-}) {
-  return (
-    <svg
-      className={className}
-      fill="currentColor"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <title>Star</title>
-      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-    </svg>
-  );
-}
-
-export function LetterboxdIcon({
-  className = "w-5 h-5",
-}: {
-  className?: string;
-}) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 500 500"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <title>Letterboxd</title>
-      {/* Logo Letterboxd - deux cercles qui se chevauchent */}
-      <circle cx="166" cy="250" r="125" opacity="0.5" />
-      <circle cx="334" cy="250" r="125" opacity="0.5" />
-      <ellipse cx="250" cy="250" rx="75" ry="125" fill="currentColor" />
     </svg>
   );
 }
