@@ -5,6 +5,8 @@
 export function getLetterboxdSearchUrl(title: string, year?: number): string {
   // Nettoyer et slugifier le titre
   const slug = title
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-")
