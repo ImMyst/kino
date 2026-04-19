@@ -51,6 +51,12 @@ function RouteComponent() {
   const backdropUrl = movie.backdrop_path
     ? `https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`
     : "";
+  const backdropStyle = {
+    backgroundImage: backdropUrl
+      ? `url(${backdropUrl})`
+      : "radial-gradient(circle at 20% 20%, #78350f 0%, #171717 45%, #000000 100%)",
+    filter: "blur(8px)",
+  };
   const posterUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w780/${movie.poster_path}`
     : "";
@@ -78,21 +84,11 @@ function RouteComponent() {
 
   return (
     <div className="relative min-h-screen">
-      {/* Backdrop avec overlay */}
-      {backdropUrl && (
-        <>
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${backdropUrl})`,
-              filter: "blur(8px)",
-            }}
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-black via-black/90 to-black/70" />
-        </>
-      )}
-
-      {/* Contenu principal */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={backdropStyle}
+      />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/90 to-black/70" />
       <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-8 animate-scaleUp">
           {/* Colonne gauche - Affiche */}
@@ -124,14 +120,14 @@ function RouteComponent() {
           </div>
 
           {/* Colonne droite - Informations */}
-          <div className="flex flex-col gap-6 text-white overflow-y-auto">
+          <div className="flex flex-col gap-6 overflow-y-auto text-white">
             {/* En-tête du film */}
             <div className="flex flex-col gap-2">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-0.5 font-nohemi">
                 {movie.title}
               </h1>
               {director && (
-                <p className="text-lg md:text-xl text-neutral-400 font-outfit">
+                <p className="text-lg md:text-xl font-outfit text-neutral-400">
                   de{" "}
                   <span className="text-orange-400 font-medium">
                     {director.name}
@@ -143,7 +139,7 @@ function RouteComponent() {
                   {movie.tagline}
                 </p>
               )}
-              <p className="text-xl text-neutral-300 font-outfit">
+              <p className="text-xl font-outfit text-neutral-300">
                 {dayjs(movie.release_date).year()}
               </p>
             </div>
@@ -193,7 +189,7 @@ function RouteComponent() {
                   Synopsis
                 </h2>
                 <div className="relative">
-                  <p className="text-neutral-200 leading-relaxed text-base md:text-lg font-outfit">
+                  <p className="leading-relaxed text-base md:text-lg font-outfit text-neutral-200">
                     {movie.overview}
                   </p>
                 </div>

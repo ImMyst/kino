@@ -61,6 +61,9 @@ function App() {
   const movies = useSuspenseQuery(
     moviesByWeekQueryOptions(toISODate(weekStart)),
   );
+  const sortedMovies = [...movies.data.results].sort(
+    (a, b) => b.popularity - a.popularity,
+  );
 
   // Mettre à jour le titre de la page
   useEffect(() => {
@@ -98,7 +101,7 @@ function App() {
         <EmptyWeek weekStart={weekStart} />
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
-          {movies.data.results.map((movie) => (
+          {sortedMovies.map((movie) => (
             <Movie movie={movie} key={movie.id} />
           ))}
         </div>
