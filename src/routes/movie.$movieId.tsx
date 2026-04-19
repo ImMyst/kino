@@ -62,10 +62,7 @@ function RouteComponent() {
     : "";
 
   // Générer l'URL Letterboxd
-  const letterboxdUrl = getLetterboxdSearchUrl(
-    movie.title,
-    dayjs(movie.release_date).year(),
-  );
+  const letterboxdUrl = getLetterboxdSearchUrl(movie.title);
 
   // Formater la durée avec Day.js duration plugin
   const formatRuntime = (minutes: number) => {
