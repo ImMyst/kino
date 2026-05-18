@@ -13,14 +13,14 @@ import {
   getPreviousWeek,
   getWeekEnd,
   parseISODate,
-  toISODate,
+  toISODate
 } from "@/utils/dates";
 import { moviesByWeekQueryOptions } from "@/utils/movies";
 
 export const Route = createFileRoute("/")({
   validateSearch: (search: Record<string, unknown>): { week?: string } => {
     return {
-      week: typeof search.week === "string" ? search.week : undefined,
+      week: typeof search.week === "string" ? search.week : undefined
     };
   },
   component: App,
@@ -30,9 +30,7 @@ export const Route = createFileRoute("/")({
     const weekStart = deps.week ? deps.week : toISODate(getCurrentWeekStart());
 
     // Charger les données de la semaine
-    await context.queryClient.ensureQueryData(
-      moviesByWeekQueryOptions(weekStart),
-    );
+    await context.queryClient.ensureQueryData(moviesByWeekQueryOptions(weekStart));
 
     // Précharger les semaines adjacentes pour une navigation fluide
     const weekStartDate = parseISODate(weekStart);
@@ -46,7 +44,7 @@ export const Route = createFileRoute("/")({
       const nextWeek = toISODate(getNextWeek(weekStartDate));
       context.queryClient.prefetchQuery(moviesByWeekQueryOptions(nextWeek));
     }
-  },
+  }
 });
 
 function App() {
@@ -54,16 +52,10 @@ function App() {
   const search = Route.useSearch();
 
   // Déterminer la semaine affichée
-  const weekStart = search.week
-    ? parseISODate(search.week)
-    : getCurrentWeekStart();
+  const weekStart = search.week ? parseISODate(search.week) : getCurrentWeekStart();
 
-  const movies = useSuspenseQuery(
-    moviesByWeekQueryOptions(toISODate(weekStart)),
-  );
-  const sortedMovies = [...movies.data.results].sort(
-    (a, b) => b.popularity - a.popularity,
-  );
+  const movies = useSuspenseQuery(moviesByWeekQueryOptions(toISODate(weekStart)));
+  const sortedMovies = [...movies.data.results].sort((a, b) => b.popularity - a.popularity);
 
   // Mettre à jour le titre de la page
   useEffect(() => {
@@ -75,7 +67,7 @@ function App() {
   const handleWeekChange = (newWeekStart: Date) => {
     navigate({
       to: "/",
-      search: { week: toISODate(newWeekStart) },
+      search: { week: toISODate(newWeekStart) }
     });
   };
 
@@ -86,10 +78,7 @@ function App() {
           Sorties cinéma
         </h1>
 
-        <WeekNavigator
-          currentWeekStart={weekStart}
-          onNavigate={handleWeekChange}
-        />
+        <WeekNavigator currentWeekStart={weekStart} onNavigate={handleWeekChange} />
 
         <p className="text-neutral-500 text-sm">
           {movies.data.results.length} film

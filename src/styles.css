@@ -71,8 +71,17 @@ html,
 body {
   margin: 0;
   font-family:
-    "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Outfit",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -104,8 +113,7 @@ h6 {
 }
 
 code {
-  font-family:
-    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 @layer utilities {
@@ -114,7 +122,11 @@ code {
   }
 
   .font-outfit {
-    font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family:
+      "Outfit",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
   }
 }
 

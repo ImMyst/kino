@@ -8,17 +8,14 @@ import type { TMovie, TUpcomingMoviesResult } from "@/utils/types";
 
 const headers = {
   Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
-  "Content-Type": "application/json",
+  "Content-Type": "application/json"
 };
 
 export const fetchMovies = createServerFn().handler(async () => {
-  const response = await fetch(
-    `${TMDB_API_URL}/movie/upcoming?page=1&language=fr-FR&region=FR`,
-    {
-      method: "GET",
-      headers,
-    },
-  );
+  const response = await fetch(`${TMDB_API_URL}/movie/upcoming?page=1&language=fr-FR&region=FR`, {
+    method: "GET",
+    headers
+  });
 
   const json = (await response.json()) as TUpcomingMoviesResult;
 
@@ -30,36 +27,34 @@ export const fetchMovies = createServerFn().handler(async () => {
           `${TMDB_API_URL}/movie/${movie.id}/credits?language=fr-FR`,
           {
             method: "GET",
-            headers,
-          },
+            headers
+          }
         );
         const credits = (await creditsResponse.json()) as {
           crew: { job: string; name: string }[];
         };
-        const director = credits.crew.find(
-          (member) => member.job === "Director",
-        );
+        const director = credits.crew.find((member) => member.job === "Director");
 
         return {
           ...movie,
-          director: director?.name || null,
+          director: director?.name || null
         };
       } catch {
         return {
           ...movie,
-          director: null,
+          director: null
         };
       }
-    }),
+    })
   );
 
   const movies = moviesWithDirector.sort(
-    (a, b) => dayjs(a.release_date).unix() - dayjs(b.release_date).unix(),
+    (a, b) => dayjs(a.release_date).unix() - dayjs(b.release_date).unix()
   );
 
   return {
     ...json,
-    results: movies,
+    results: movies
   };
 });
 
@@ -84,7 +79,7 @@ export const fetchMoviesByWeek = createServerFn()
 
     const response = await fetch(url.toString(), {
       method: "GET",
-      headers,
+      headers
     });
 
     const json = (await response.json()) as TUpcomingMoviesResult;
@@ -99,27 +94,25 @@ export const fetchMoviesByWeek = createServerFn()
             `${TMDB_API_URL}/movie/${movie.id}/credits?language=fr-FR`,
             {
               method: "GET",
-              headers,
-            },
+              headers
+            }
           );
           const credits = (await creditsResponse.json()) as {
             crew: { job: string; name: string }[];
           };
-          const director = credits.crew.find(
-            (member) => member.job === "Director",
-          );
+          const director = credits.crew.find((member) => member.job === "Director");
 
           return {
             ...movie,
-            director: director?.name || null,
+            director: director?.name || null
           };
         } catch {
           return {
             ...movie,
-            director: null,
+            director: null
           };
         }
-      }),
+      })
     );
 
     // Trier par date de sortie d'abord, puis par popularité
@@ -138,20 +131,17 @@ export const fetchMoviesByWeek = createServerFn()
 
     return {
       ...json,
-      results: movies,
+      results: movies
     };
   });
 
 export const getMovieDetail = createServerFn()
   .inputValidator((data: { movieId: string }) => data)
   .handler(async ({ data: { movieId } }) => {
-    const response = await fetch(
-      `${TMDB_API_URL}/movie/${movieId}?language=fr-FR`,
-      {
-        method: "GET",
-        headers,
-      },
-    );
+    const response = await fetch(`${TMDB_API_URL}/movie/${movieId}?language=fr-FR`, {
+      method: "GET",
+      headers
+    });
 
     if (!response.ok) {
       throw new Error(`Error fetching movie detail: ${response.statusText}`);
@@ -164,13 +154,10 @@ export const getMovieDetail = createServerFn()
 export const getMovieCredits = createServerFn()
   .inputValidator((data: { movieId: string }) => data)
   .handler(async ({ data: { movieId } }) => {
-    const response = await fetch(
-      `${TMDB_API_URL}/movie/${movieId}/credits?language=fr-FR`,
-      {
-        method: "GET",
-        headers,
-      },
-    );
+    const response = await fetch(`${TMDB_API_URL}/movie/${movieId}/credits?language=fr-FR`, {
+      method: "GET",
+      headers
+    });
 
     if (!response.ok) {
       throw new Error(`Error fetching movie credits: ${response.statusText}`);
@@ -183,27 +170,27 @@ export const getMovieCredits = createServerFn()
 export const moviesQueryOptions = () => {
   return queryOptions({
     queryKey: queryKeys.movies.list(),
-    queryFn: fetchMovies,
+    queryFn: fetchMovies
   });
 };
 
 export const moviesByWeekQueryOptions = (weekStart: string) => {
   return queryOptions({
     queryKey: queryKeys.movies.byWeek(weekStart),
-    queryFn: () => fetchMoviesByWeek({ data: { weekStart } }),
+    queryFn: () => fetchMoviesByWeek({ data: { weekStart } })
   });
 };
 
 export const movieDetailQueryOptions = ({ movieId }: { movieId: string }) => {
   return queryOptions({
     queryKey: queryKeys.movies.detail(movieId),
-    queryFn: () => getMovieDetail({ data: { movieId } }),
+    queryFn: () => getMovieDetail({ data: { movieId } })
   });
 };
 
 export const movieCastQueryOptions = ({ movieId }: { movieId: string }) => {
   return queryOptions({
     queryKey: queryKeys.movies.cast(movieId),
-    queryFn: () => getMovieCredits({ data: { movieId } }),
+    queryFn: () => getMovieCredits({ data: { movieId } })
   });
 };

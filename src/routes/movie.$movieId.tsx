@@ -9,37 +9,26 @@ import {
   ClockIcon,
   ExternalLinkIcon,
   LanguageIcon,
-  MovieBadge,
+  MovieBadge
 } from "@/components/MovieBadge";
 import { getLetterboxdSearchUrl } from "@/utils/letterboxd";
-import {
-  movieCastQueryOptions,
-  movieDetailQueryOptions,
-} from "../utils/movies";
+import { movieCastQueryOptions, movieDetailQueryOptions } from "../utils/movies";
 
 export const Route = createFileRoute("/movie/$movieId")({
   component: RouteComponent,
   loader: async ({ context, params }) => {
-    await context.queryClient.ensureQueryData(
-      movieDetailQueryOptions({ movieId: params.movieId }),
-    );
+    await context.queryClient.ensureQueryData(movieDetailQueryOptions({ movieId: params.movieId }));
 
-    await context.queryClient.ensureQueryData(
-      movieCastQueryOptions({ movieId: params.movieId }),
-    );
-  },
+    await context.queryClient.ensureQueryData(movieCastQueryOptions({ movieId: params.movieId }));
+  }
 });
 
 function RouteComponent() {
   const params = Route.useParams();
 
-  const { data: movie } = useSuspenseQuery(
-    movieDetailQueryOptions({ movieId: params.movieId }),
-  );
+  const { data: movie } = useSuspenseQuery(movieDetailQueryOptions({ movieId: params.movieId }));
 
-  const { data: cast } = useSuspenseQuery(
-    movieCastQueryOptions({ movieId: params.movieId }),
-  );
+  const { data: cast } = useSuspenseQuery(movieCastQueryOptions({ movieId: params.movieId }));
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -55,11 +44,9 @@ function RouteComponent() {
     backgroundImage: backdropUrl
       ? `url(${backdropUrl})`
       : "radial-gradient(circle at 20% 20%, #78350f 0%, #171717 45%, #000000 100%)",
-    filter: "blur(8px)",
+    filter: "blur(8px)"
   };
-  const posterUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w780/${movie.poster_path}`
-    : "";
+  const posterUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w780/${movie.poster_path}` : "";
 
   // Générer l'URL Letterboxd
   const letterboxdUrl = getLetterboxdSearchUrl(movie.title);
@@ -81,10 +68,7 @@ function RouteComponent() {
 
   return (
     <div className="relative min-h-screen">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={backdropStyle}
-      />
+      <div className="absolute inset-0 bg-cover bg-center" style={backdropStyle} />
       <div className="absolute inset-0 bg-linear-to-t from-black via-black/90 to-black/70" />
       <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-8 animate-scaleUp">
@@ -125,10 +109,7 @@ function RouteComponent() {
               </h1>
               {director && (
                 <p className="text-lg md:text-xl font-outfit text-neutral-400">
-                  de{" "}
-                  <span className="text-orange-400 font-medium">
-                    {director.name}
-                  </span>
+                  de <span className="text-orange-400 font-medium">{director.name}</span>
                 </p>
               )}
               {movie.tagline && (
@@ -170,11 +151,7 @@ function RouteComponent() {
             {movie.genres.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {movie.genres.map((genre) => (
-                  <MovieBadge
-                    key={genre.id}
-                    label={genre.name}
-                    variant="orange"
-                  />
+                  <MovieBadge key={genre.id} label={genre.name} variant="orange" />
                 ))}
               </div>
             )}

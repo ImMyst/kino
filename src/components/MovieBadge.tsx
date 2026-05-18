@@ -7,21 +7,16 @@ type MovieBadgeProps = {
   size?: "sm" | "md";
 };
 
-export function MovieBadge({
-  icon,
-  label,
-  variant = "default",
-  size = "md",
-}: MovieBadgeProps) {
+export function MovieBadge({ icon, label, variant = "default", size = "md" }: MovieBadgeProps) {
   const variantClasses = {
     default: "bg-neutral-800 text-neutral-200 border-neutral-700",
     orange: "bg-orange-500/10 text-orange-500 border-orange-500/20",
-    subtle: "bg-neutral-800/50 text-neutral-300 border-neutral-700/50",
+    subtle: "bg-neutral-800/50 text-neutral-300 border-neutral-700/50"
   };
 
   const sizeClasses = {
     sm: "px-2 py-0.5 text-xs",
-    md: "px-3 py-1 text-sm",
+    md: "px-3 py-1 text-sm"
   };
 
   return (
@@ -36,12 +31,7 @@ export function MovieBadge({
 
 export function ClockIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <title>Clock</title>
       <path
         strokeLinecap="round"
@@ -53,18 +43,9 @@ export function ClockIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-export function CalendarIcon({
-  className = "w-4 h-4",
-}: {
-  className?: string;
-}) {
+export function CalendarIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <title>Calendar</title>
       <path
         strokeLinecap="round"
@@ -76,18 +57,9 @@ export function CalendarIcon({
   );
 }
 
-export function LanguageIcon({
-  className = "w-4 h-4",
-}: {
-  className?: string;
-}) {
+export function LanguageIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <title>Language</title>
       <path
         strokeLinecap="round"
@@ -99,18 +71,9 @@ export function LanguageIcon({
   );
 }
 
-export function ExternalLinkIcon({
-  className = "w-4 h-4",
-}: {
-  className?: string;
-}) {
+export function ExternalLinkIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <title>External link</title>
       <path
         strokeLinecap="round"

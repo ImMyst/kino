@@ -40,9 +40,7 @@ export function CastCard({ cast }: CastCardProps) {
         <p className="text-sm font-medium text-neutral-200 line-clamp-2 leading-tight">
           {cast.name}
         </p>
-        <p className="text-xs text-neutral-400 line-clamp-1">
-          {cast.character}
-        </p>
+        <p className="text-xs text-neutral-400 line-clamp-1">{cast.character}</p>
       </div>
     </div>
   );

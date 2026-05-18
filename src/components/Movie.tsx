@@ -51,9 +51,7 @@ export function Movie({ movie }: { movie: TUpcomingMovie }) {
             {movie.director && (
               <div className="flex flex-col gap-1">
                 <span className="text-xs text-neutral-400">Réalisé par</span>
-                <span className="text-sm font-semibold text-white">
-                  {movie.director}
-                </span>
+                <span className="text-sm font-semibold text-white">{movie.director}</span>
               </div>
             )}
           </div>

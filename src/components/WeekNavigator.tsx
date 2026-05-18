@@ -6,7 +6,7 @@ import {
   getNextWeek,
   getPreviousWeek,
   getWeekEnd,
-  toISODate,
+  toISODate
 } from "@/utils/dates";
 
 interface WeekNavigatorProps {
@@ -14,14 +14,10 @@ interface WeekNavigatorProps {
   onNavigate: (newWeekStart: Date) => void;
 }
 
-export function WeekNavigator({
-  currentWeekStart,
-  onNavigate,
-}: WeekNavigatorProps) {
+export function WeekNavigator({ currentWeekStart, onNavigate }: WeekNavigatorProps) {
   const weekEnd = getWeekEnd(currentWeekStart);
   const formattedWeek = formatWeekRange(currentWeekStart, weekEnd);
-  const isCurrentWeek =
-    toISODate(currentWeekStart) === toISODate(getCurrentWeekStart());
+  const isCurrentWeek = toISODate(currentWeekStart) === toISODate(getCurrentWeekStart());
 
   const handlePrevious = () => {
     if (canNavigatePrevious(currentWeekStart)) {

@@ -14,11 +14,11 @@ export function getRouter() {
     context: { queryClient },
     defaultPreload: "intent",
     defaultErrorComponent: DefaultCatchBoundary,
-    defaultNotFoundComponent: () => <NotFound />,
+    defaultNotFoundComponent: () => <NotFound />
   });
   setupRouterSsrQueryIntegration({
     router,
-    queryClient,
+    queryClient
   });
 
   return router;

@@ -108,13 +108,7 @@ export type TCrew = {
   popularity: number;
   profile_path: string;
   credit_id: string;
-  department:
-    | "Acting"
-    | "Directing"
-    | "Sound"
-    | "Production"
-    | "Writing"
-    | "Costume & Make-Up";
+  department: "Acting" | "Directing" | "Sound" | "Production" | "Writing" | "Costume & Make-Up";
   job:
     | "Director"
     | "Actor"
